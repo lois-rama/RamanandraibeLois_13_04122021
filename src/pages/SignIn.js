@@ -1,10 +1,11 @@
 import React, {useState} from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from 'react-router-dom'
 import { signInAction } from "../actions"
 import '../styles/pages/SignIn.css'
 
 export default function SignIn() {
-
+    const user = useSelector((state) => state.user);
     const [userDetails, setUser] = useState({email: "", password: ""});
     console.log(userDetails);
 
@@ -16,6 +17,9 @@ export default function SignIn() {
 
         dispatch(signInAction(userDetails));
     }
+    
+    if (user.isSignedIn) return <Navigate to='/profile' />;
+
     return(
         <main className="main bg-dark">
             <section className="sign-in-content">

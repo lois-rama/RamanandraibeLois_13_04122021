@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SIGN_IN_REQUEST, SIGN_IN_SUCCESS, SIGN_IN_ERROR } from '../actions';
+import { SIGN_IN_REQUEST, SIGN_IN_SUCCESS, SIGN_IN_ERROR, EDIT_USER_PROFILE, EDIT_USER_PROFILE_ERROR } from '../actions';
 const initialState = {
     signInRequest: false,
 	isSignedIn: false,
@@ -18,6 +18,7 @@ const user = (state = initialState, action) => {
         case SIGN_IN_REQUEST:
             return {
                 ...state,
+                signInRequest: true,
             };
         case SIGN_IN_SUCCESS:
             return {
@@ -30,6 +31,17 @@ const user = (state = initialState, action) => {
             return { 
                 ...state,
                 error: action.payload.message,
+            };
+        case EDIT_USER_PROFILE:
+            return {
+                ...state,
+                firstName: action.payload.firstName,
+                lastName: action.payload.lastName,
+            };
+        case EDIT_USER_PROFILE_ERROR:
+            return { 
+                ...state,
+                error: action.payload.error
             };
         default:
             return state;

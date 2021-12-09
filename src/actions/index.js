@@ -1,9 +1,11 @@
-import { signInRequest } from "../service/API";
+import { signInRequest, userProfileRequest, updateUserProfile } from "../service/API";
 
 export const SIGN_IN_REQUEST = 'auth/signInRequest'
 export const SIGN_IN_SUCCESS = 'auth/signInSuccess'
 export const SIGN_IN_ERROR = 'auth/signInError'
 
+export const EDIT_USER_PROFILE = 'profile/editUserProfile';
+export const EDIT_USER_PROFILE_ERROR = 'profile/editUserProfileError'
 
 export const signInAction = (userDetails) => {
 	return async (dispatch) => {
@@ -34,3 +36,44 @@ export const signInError = (error) => {
 		payload: error,
 	}
 }
+
+export const getUserProfile = (token) => {
+	return async (dispatch) => {
+		try {
+			const res = await userProfileRequest(token)
+			dispatch({
+				type: EDIT_USER_PROFILE,
+				payload: {
+					firstName: res.firstName,
+					lastName: res.lastName,
+				},
+			});
+		} catch (error) {
+			dispatch(editUserProfileError(error));
+		}
+	};
+};
+
+export const editUserProfile = (firstName, lastName, token) => {
+	return async (dispatch) => {
+		try {
+			await updateUserProfile(firstName, lastName, token)
+			dispatch({
+				type: EDIT_USER_PROFILE,
+				payload: {
+					firstName,
+					lastName,
+				},
+			});
+		} catch (error) {
+			dispatch(editUserProfileError(error));
+		}
+	};
+};
+
+export const editUserProfileError = (error) => {
+	return {
+		type: EDIT_USER_PROFILE_ERROR,
+		payload: error,
+	};
+};
