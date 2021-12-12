@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector,  } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router';
 import { getUserProfile, editUserProfile } from '../actions/index';
 
@@ -28,11 +28,13 @@ export default function Profile() {
 		setEditing(false);
 		
 		if (editedProfile.firstName && editedProfile.lastName !== '') {
-			dispatch(editUserProfile(editedProfile.firstName, editedProfile.lastName, user.token));
+			dispatch(editUserProfile(editedProfile.firstName, editedProfile.lastName,user.token));
 		}
 	};
-    
-	if (!user.isSignedIn) return <Navigate to='/' />;
+    console.log("ok")
+	if (!user.isSignedIn) return <Navigate to='/sign-in
+	' />;
+	console.log("ok")
 
 	return (
 		<main className='main bg-dark'>

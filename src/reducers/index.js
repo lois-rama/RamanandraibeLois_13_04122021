@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SIGN_IN_REQUEST, SIGN_IN_SUCCESS, SIGN_IN_ERROR, EDIT_USER_PROFILE, EDIT_USER_PROFILE_ERROR } from '../actions';
+import { SIGN_IN_REQUEST, SIGN_IN_SUCCESS, SIGN_IN_ERROR, SIGN_OUT, EDIT_USER_PROFILE, EDIT_USER_PROFILE_ERROR } from '../actions';
 const initialState = {
     signInRequest: false,
 	isSignedIn: false,
@@ -32,6 +32,9 @@ const user = (state = initialState, action) => {
                 ...state,
                 error: action.payload.message,
             };
+        case SIGN_OUT:
+            return initialState;
+        
         case EDIT_USER_PROFILE:
             return {
                 ...state,

@@ -2,6 +2,7 @@ import { signInRequest, userProfileRequest, updateUserProfile } from "../service
 
 export const SIGN_IN_REQUEST = 'auth/signInRequest'
 export const SIGN_IN_SUCCESS = 'auth/signInSuccess'
+export const SIGN_OUT = 'auth/signOut'
 export const SIGN_IN_ERROR = 'auth/signInError'
 
 export const EDIT_USER_PROFILE = 'profile/editUserProfile';
@@ -35,6 +36,13 @@ export const signInError = (error) => {
 		type: SIGN_IN_ERROR,
 		payload: error,
 	}
+}
+
+export const signOut = () => {
+	localStorage.removeItem('userToken')
+	return {
+		type: SIGN_OUT,
+	};
 }
 
 export const getUserProfile = (token) => {
