@@ -1,6 +1,4 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom'
-import { useSelector } from "react-redux";
 import securityIcon from '../img/icon-security.png';
 import moneyIcon from '../img/icon-money.png';
 import chatIcon from '../img/icon-chat.png';

@@ -18,8 +18,6 @@ export default function SignIn() {
         dispatch(signInAction(userDetails));
     }
     
-    if (user.isSignedIn) return <Navigate to='/profile' />;
-
     return(
         <main className="main bg-dark">
             <section className="sign-in-content">

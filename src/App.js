@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import './App.css';
@@ -18,15 +18,28 @@ function App() {
 		checkAutoLogin(dispatch, user.userDetails);
 	}, []);
 
+	let routes = (
+		<Routes>
+			<Route exact path='/' element={<Homepage/>} />
+          	<Route exact path='/sign-in' element={<SignIn/>} />
+		</Routes>
+	)
+
+	if(user.isSignedIn) {
+		routes = (
+			<Routes>
+				<Route exact path='/' element={<Homepage/>} />
+				<Route exact path='/profile' element={<Profile/>} />
+				<Route path='/sign-in' element={user.isSignedIn ? <Navigate to="/profile"/> : <SignIn/>}/>
+			</Routes>
+		)
+	}
+
   return (
     <div className='App'>
 			<BrowserRouter>
 				<Nav />
-				<Routes>
-					<Route exact path='/' element={<Homepage/>} />
-          			<Route exact path='/sign-in' element={<SignIn/>} />
-					<Route exact path='/profile' element={<Profile/>} />
-				</Routes>
+				{routes}
 				<Footer />
 			</BrowserRouter>
 		</div>

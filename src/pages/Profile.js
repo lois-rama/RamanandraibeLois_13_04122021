@@ -31,10 +31,6 @@ export default function Profile() {
 			dispatch(editUserProfile(editedProfile.firstName, editedProfile.lastName,user.token));
 		}
 	};
-    console.log("ok")
-	if (!user.isSignedIn) return <Navigate to='/sign-in
-	' />;
-	console.log("ok")
 
 	return (
 		<main className='main bg-dark'>

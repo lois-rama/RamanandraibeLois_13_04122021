@@ -15,6 +15,7 @@ export const signInAction = (userDetails) => {
 			const token = await signInRequest(userDetails)
 			dispatch(signInSuccess(userDetails, token))
 		} catch (error) {
+			alert(error);
 			dispatch(signInError(error));
 			
 		}
@@ -57,6 +58,7 @@ export const getUserProfile = (token) => {
 				},
 			});
 		} catch (error) {
+			alert(error);
 			dispatch(editUserProfileError(error));
 		}
 	};
