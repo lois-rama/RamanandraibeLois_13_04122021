@@ -21,6 +21,10 @@ export default function Profile() {
 		dispatch(getUserProfile(user.token));
 	}, []);
 
+	if(user.rememberMe){
+		localStorage.setItem('userToken', user.token)
+	}
+
 	function onSave(event) {
 		event.preventDefault();
 

@@ -1,21 +1,34 @@
 import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from 'react-router-dom'
-import { signInAction } from "../actions"
+import { signInAction, rememberMeTrue, rememberMeFalse } from "../actions"
 import '../styles/pages/SignIn.css'
 
 export default function SignIn() {
-    const user = useSelector((state) => state.user);
     const [userDetails, setUser] = useState({email: "", password: ""});
+    const [rememberMe, setRememberMe] = useState(false)
     console.log(userDetails);
 
     const dispatch = useDispatch()
+    const user = useSelector((state) => state.user);
     
     function onSignIn(event){
         event.preventDefault();
         console.log('form submit')
 
         dispatch(signInAction(userDetails));
+    }
+    function onRememberMeCheck(event){
+        let checked = event.target.checked
+
+        if(checked) {
+            setRememberMe(true)
+            dispatch(rememberMeTrue())
+        }
+        else if (checked === false){
+            setRememberMe(false)
+            dispatch(rememberMeFalse())
+        }
     }
     
     return(
@@ -36,7 +49,7 @@ export default function SignIn() {
                             onChange={event => setUser({email: userDetails.email, password: event.target.value})}/>
                     </div>
                     <div className="input-remember">
-                        <input type="checkbox" id="remember-me"/>
+                        <input type="checkbox" id="remember-me" checked={rememberMe ? true : false} onChange={onRememberMeCheck}/>
                         <label htmlFor="remember-me">Remember me </label>
                     </div>
                     <button className="sign-in-button">Sign In</button>

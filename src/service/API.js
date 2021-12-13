@@ -6,8 +6,7 @@ const instance = axios.create({
 
 export const signInRequest = async (user) => {
 	const res = await instance.post(`/login`, user);
-	localStorage.setItem('userToken', res.data.body.token)
-	return localStorage.getItem('userToken');		
+	return res.data.body.token;		
 };
 
 export const userProfileRequest = async (token) => {

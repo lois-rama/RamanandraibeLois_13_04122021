@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import { SIGN_IN_REQUEST, SIGN_IN_SUCCESS, SIGN_IN_ERROR, SIGN_OUT, EDIT_USER_PROFILE, EDIT_USER_PROFILE_ERROR } from '../actions';
+import { SIGN_IN_REQUEST, SIGN_IN_SUCCESS, SIGN_IN_ERROR, SIGN_OUT, EDIT_USER_PROFILE, EDIT_USER_PROFILE_ERROR, REMEMBER_ME_FALSE, REMEMBER_ME_TRUE } from '../actions';
 const initialState = {
     signInRequest: false,
 	isSignedIn: false,
+    rememberMe: false,
 	error: null,
 	userDetails:{
         email:'',
@@ -32,6 +33,19 @@ const user = (state = initialState, action) => {
                 ...state,
                 error: action.payload.message,
             };
+
+        case REMEMBER_ME_TRUE:
+            return {
+                ...state,
+                rememberMe: true
+            };
+
+         case REMEMBER_ME_FALSE:
+            return {
+                ...state,
+                rememberMe: false
+            };
+
         case SIGN_OUT:
             return initialState;
         

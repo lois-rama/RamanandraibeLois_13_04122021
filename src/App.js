@@ -15,31 +15,19 @@ function App() {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		checkAutoLogin(dispatch, user.userDetails);
+			checkAutoLogin(dispatch, user.userDetails)
 	}, []);
 
-	let routes = (
-		<Routes>
-			<Route exact path='/' element={<Homepage/>} />
-          	<Route exact path='/sign-in' element={<SignIn/>} />
-		</Routes>
-	)
 
-	if(user.isSignedIn) {
-		routes = (
-			<Routes>
-				<Route exact path='/' element={<Homepage/>} />
-				<Route exact path='/profile' element={<Profile/>} />
-				<Route path='/sign-in' element={user.isSignedIn ? <Navigate to="/profile"/> : <SignIn/>}/>
-			</Routes>
-		)
-	}
-
-  return (
-    <div className='App'>
+ 	return (
+    	<div className='App'>
 			<BrowserRouter>
 				<Nav />
-				{routes}
+				<Routes>
+					<Route exact path='/' element={<Homepage/>} />
+          			<Route exact path='/sign-in' element={user.isSignedIn ? <Navigate to="/profile"/> : <SignIn/>}/>
+					<Route path='/profile' element={user.isSignedIn ? <Profile/> : <Navigate to="/sign-in"/>}/>
+				</Routes>
 				<Footer />
 			</BrowserRouter>
 		</div>

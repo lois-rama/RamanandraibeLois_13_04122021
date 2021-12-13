@@ -5,6 +5,10 @@ export const SIGN_IN_SUCCESS = 'auth/signInSuccess'
 export const SIGN_OUT = 'auth/signOut'
 export const SIGN_IN_ERROR = 'auth/signInError'
 
+export const REMEMBER_ME_TRUE = 'auth/rememberMeChecked'
+export const REMEMBER_ME_FALSE = 'auth/rememberMeNotChecked'
+
+
 export const EDIT_USER_PROFILE = 'profile/editUserProfile';
 export const EDIT_USER_PROFILE_ERROR = 'profile/editUserProfileError'
 
@@ -45,6 +49,19 @@ export const signOut = () => {
 		type: SIGN_OUT,
 	};
 }
+
+export const rememberMeTrue = () => {
+	return {
+		type: REMEMBER_ME_TRUE,
+	}
+};
+
+export const rememberMeFalse = () => {
+	return {
+		type: REMEMBER_ME_FALSE,
+	}
+};
+
 
 export const getUserProfile = (token) => {
 	return async (dispatch) => {
