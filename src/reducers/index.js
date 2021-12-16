@@ -31,7 +31,7 @@ const user = (state = initialState, action) => {
          case SIGN_IN_ERROR:
             return { 
                 ...state,
-                error: action.payload.message,
+                error: action.payload,
             };
 
         case REMEMBER_ME_TRUE:
@@ -58,7 +58,7 @@ const user = (state = initialState, action) => {
         case EDIT_USER_PROFILE_ERROR:
             return { 
                 ...state,
-                error: action.payload.error
+                error: action.payload
             };
         default:
             return state;

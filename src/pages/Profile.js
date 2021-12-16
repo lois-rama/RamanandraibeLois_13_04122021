@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router';
 import { getUserProfile, editUserProfile } from '../actions/index';
+import Error from './Error';
 
 import { accounts } from '../data/data';
 import Account from '../components/Account';
@@ -36,8 +37,11 @@ export default function Profile() {
 		}
 	};
 
+	if(user.error) return <Error error={user.error}/>
+
 	return (
 		<main className='main bg-dark'>
+			{user.error === "response" && <h1>Oups une erreur s'est produite.</h1>}
 			{!isEditing ? (
 				<div className='header'>
 					<h1> Welcome back <br />

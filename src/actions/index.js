@@ -1,4 +1,4 @@
-import { signInRequest, userProfileRequest, updateUserProfile } from "../service/API";
+import { signInRequest, userProfileRequest, updateUserProfile, handlingErrors } from "../service/API";
 
 export const SIGN_IN_REQUEST = 'auth/signInRequest'
 export const SIGN_IN_SUCCESS = 'auth/signInSuccess'
@@ -19,9 +19,9 @@ export const signInAction = (userDetails) => {
 			const token = await signInRequest(userDetails)
 			dispatch(signInSuccess(userDetails, token))
 		} catch (error) {
-			alert(error);
-			dispatch(signInError(error));
-			
+			let errorType = handlingErrors(error)
+			dispatch(signInError(errorType));
+			console.log(errorType)
 		}
 	};
 };
@@ -75,8 +75,8 @@ export const getUserProfile = (token) => {
 				},
 			});
 		} catch (error) {
-			alert(error);
-			dispatch(editUserProfileError(error));
+			let errorType = handlingErrors(error)
+			dispatch(editUserProfileError(errorType));
 		}
 	};
 };
@@ -93,7 +93,8 @@ export const editUserProfile = (firstName, lastName, token) => {
 				},
 			});
 		} catch (error) {
-			dispatch(editUserProfileError(error));
+			let errorType = handlingErrors(error)
+			dispatch(editUserProfileError(errorType));
 		}
 	};
 };

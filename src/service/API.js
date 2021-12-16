@@ -18,3 +18,17 @@ export const updateUserProfile = async (firstName, lastName, token) => {
 	const res = await instance.put('/profile',{ firstName, lastName },{ headers: { Authorization: `Bearer ${token}` } });
 	return res;
 }
+
+export function handlingErrors(error){
+	if (error.response) {
+		// The request was made and the server responded with a status code
+		// that falls out of the range of 2xx
+		return "response"
+	  } else if (error.request) {
+		// The request was made but no response was received
+		return "request"
+	  } else {
+		// Something happened in setting up the request that triggered an Error
+		console.log('Error', error.message);
+	  }
+};
