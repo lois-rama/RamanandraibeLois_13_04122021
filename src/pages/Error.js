@@ -1,18 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import '../styles/pages/Error.css';
 
 export default function Error(props) {
     switch (props.error) {
         case 'response':
             return (
-                <div>
-                    <p>Oups... Une erreur s'est produite</p>
+                <div className="errorContainer">
+                    <p className="errorText">Oups... Une erreur s'est produite</p>
                 </div>
             )
         case 'request':
             return (
-                <div>
-                    <p>Service indisponible.</p>
+                <div className="errorContainer">
+                    <p className="errorText">Service indisponible.</p>
                 </div>
             )
         case '404':

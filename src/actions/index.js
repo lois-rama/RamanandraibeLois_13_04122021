@@ -77,6 +77,9 @@ export const getUserProfile = (token) => {
 		} catch (error) {
 			let errorType = handlingErrors(error)
 			dispatch(editUserProfileError(errorType));
+			if(errorType === 'unauthorized') {
+				dispatch(signOut())
+			}
 		}
 	};
 };
